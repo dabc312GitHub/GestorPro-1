@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField
+from wtforms import StringField,PasswordField,SubmitField, DateField, DateTimeField, IntegerField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import InputRequired, Length, EqualTo, email_validator,ValidationError
 from models import User
@@ -35,3 +35,23 @@ class LoginForm(FlaskForm):
     password=PasswordField('password', validators=[InputRequired(message="Campo requerido"),invalid_credentials])
 
     submit_button=SubmitField('Login')
+
+class EventoForm(FlaskForm):
+    nombre=StringField('nombre', validators=[InputRequired(message="Nombre requerido")])
+    fecha_inicial=DateField('fecha_i', validators=[InputRequired(message="Fecha inicial requerido")])
+    fecha_final=DateField('fecha_f', validators=[InputRequired(message="Fecha final requerido")])
+    ubicacion=StringField('ubicacion', validators=[InputRequired(message="Ubicacion requerido")])
+    descripcion=StringField('descripcion', validators=[InputRequired(message="Descripcion requerido")])
+
+    submit_button=SubmitField('Crear Evento')
+
+class UE(FlaskForm):
+    id_e=IntegerField('id_e')
+    nombre=StringField('nombre', validators=[InputRequired(message="Nombre requerido")])
+    fecha_inicial=DateTimeField('fecha_i', validators=[InputRequired(message="Fecha inicial requerido")])
+    fecha_final=DateTimeField('fecha_f', validators=[InputRequired(message="Fecha final requerido")])
+    ubicacion=StringField('ubicacion', validators=[InputRequired(message="Ubicacion requerido")])
+    descripcion=StringField('descripcion', validators=[InputRequired(message="Descripcion requerido")])
+
+    submit_button=SubmitField('Aceptar')
+    delete=SubmitField('Borrar')
