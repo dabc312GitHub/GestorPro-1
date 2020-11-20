@@ -20,6 +20,7 @@ class User(UserMixin, db.Model):
     contraseña=db.Column(db.String(),nullable=False)
     email=db.Column(db.String(120),unique=True)
     eventos=db.relationship('Evento',secondary=gestion_e, backref=db.backref('Usuarios_r'), lazy='dynamic')
+    #id_rol = db.Column(db.Integer, db.ForeignKey('Rol.id_rol'),nullable=False)
 
 class Evento(db.Model):
     __tablename__= "Evento"
@@ -35,4 +36,17 @@ class Material(db.Model):
     id_material=db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String(100),nullable=False)
     stock=db.Column(db.Integer)
+    descripcion=db.Column(db.String(280),nullable=False) 
+
+class Rol(db.Model):
+    __tablename__="Rol"
+    id_rol=db.Column(db.Integer, primary_key=True)
+    nombre=db.Column(db.String(100),nullable=False)
     descripcion=db.Column(db.String(280),nullable=False)
+    id_permiso = db.Column(db.Integer, db.ForeignKey('Permiso_Acceso.id_permiso'),nullable=False)
+
+class Permiso_Acceso(db.Model):
+    __tablename__="Permiso_Acceso"
+    id_permiso=db.Column(db.Integer, primary_key=True)
+    modulos=db.Column(db.String(100),nullable=False)
+    submodulos=db.Column(db.String(100),nullable=False)
