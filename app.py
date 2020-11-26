@@ -7,7 +7,8 @@ from models import *
 login = LoginManager(app)
 login.init_app(app)
 
-
+#REQUISITOS IMPLEMENTADOS EN ESTA RUTA
+#ML_01 Y ML_02
 @login.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -33,7 +34,8 @@ def login():
         return redirect(url_for('dashboard'))
         
     return render_template("index_true.html",reg_form=reg_form,log_form=log_form)
-
+#REQUISITOS IMPLEMENTADOS EN ESTA RUTA:
+#MC_01,MC03,MC05
 @app.route("/dashboard",methods=['GET','POST'])
 def dashboard():
     if not current_user.is_authenticated:
@@ -75,12 +77,12 @@ def dashboard():
         db.session.commit()
         return redirect(url_for('dashboard')) 
     return render_template("/dashboard_true.html",ev_form=evento_form,evs=eventitos,up_e=upe_form)
+#CERRAR SESIÓN
 @app.route("/logout",methods=['GET'])
 def logout():
     logout_user()
     flash('Sesion terminada', 'success')
     return redirect(url_for('login'))
-#this is our update route where we are going to update our employee
 
 if(__name__=='__main__'):
     app.run(debug=True)
