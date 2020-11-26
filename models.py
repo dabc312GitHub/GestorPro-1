@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from datetime import datetime
 app=Flask(__name__)
 app.secret_key='replace_later'
-app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://rafxar:password@localhost/gestor'
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://acvkbvhdpkqdfx:cd1254236e14c2916acc8efcabe23abd59c3022f4fe52c3a2c0a12059f197ad4@ec2-54-163-47-62.compute-1.amazonaws.com:5432/de1bc8lmmb3b0s'
 db= SQLAlchemy(app)
 
 gestion_e =db.Table('gestion_e',
