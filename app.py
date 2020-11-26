@@ -38,9 +38,9 @@ def login():
 def dashboard():
     if not current_user.is_authenticated:
         flash('Primero inicia sesión :D', 'danger')
-    eventitos=Evento.query.filter(Evento.Usuarios_r.any()).all()
+    eventitos=Evento.query.filter(Evento.Usuarios_r.any(id=current_user.id)).all()
     #CAMBIAR ESTA CONSULTA PARA QUE SOLO APAREZCAN LOS DEL USUARIO
-    cantidad=len(eventitos)
+
     evento_form=EventoForm()
     upe_form=UE()
     if upe_form.validate_on_submit():
@@ -74,7 +74,7 @@ def dashboard():
         current_user.eventos.append(evento)
         db.session.commit()
         return redirect(url_for('dashboard')) 
-    return render_template("/dashboard_true.html",ev_form=evento_form,evs=eventitos,cont=cantidad,up_e=upe_form)
+    return render_template("/dashboard_true.html",ev_form=evento_form,evs=eventitos,up_e=upe_form)
 @app.route("/logout",methods=['GET'])
 def logout():
     logout_user()
